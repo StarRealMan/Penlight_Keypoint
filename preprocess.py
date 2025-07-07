@@ -27,6 +27,8 @@ def extract_frames_from_video(video_path, output_dir, frame_interval=1, image_fo
             output_path = os.path.join(output_dir, filename)
             cv2.imwrite(output_path, frame)
 
+            breakpoint()
+
         frame_count += 1
     
     cap.release()
@@ -38,12 +40,17 @@ def preprocess_videos(video_path=None, output_dir="images", frame_interval=1, im
     
     elif os.path.isdir(video_path):
         video_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.flv', '.wmv']
+        # video_files = []
+        # for ext in video_extensions:
+        #     video_files.extend(Path(video_path).glob(f"*{ext}"))
+        #     video_files.extend(Path(video_path).glob(f"*{ext.upper()}"))
         video_files = []
-        for ext in video_extensions:
-            video_files.extend(Path(video_path).glob(f"*{ext}"))
-            video_files.extend(Path(video_path).glob(f"*{ext.upper()}"))
-
-        for video_file in video_files:
+        for video_file in ["/root/Penlight_Keypoint/training/1.MOV", 
+                           "/root/Penlight_Keypoint/training/2.MOV", 
+                           "/root/Penlight_Keypoint/training/3.mov", 
+                           "/root/Penlight_Keypoint/training/4.mov", 
+                           "/root/Penlight_Keypoint/training/7.MOV"
+                        ]:
             extract_frames_from_video(str(video_file), output_dir, frame_interval, image_format)
     
     else:
@@ -51,13 +58,12 @@ def preprocess_videos(video_path=None, output_dir="images", frame_interval=1, im
         preprocess_videos(video_path=current_dir, output_dir=output_dir, 
                          frame_interval=frame_interval, image_format=image_format)
 
-
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--video_path', type=str)
+    parser.add_argument('--video_path', type=str, default='videos')
     parser.add_argument('--output_dir', type=str, default='images')
     parser.add_argument('--frame_interval', type=int, default=1)
-    parser.add_argument('--image_format', type=str, default='jpg', choices=['jpg', 'png', 'bmp', 'jpeg', 'PNG', 'JPEG'])
+    parser.add_argument('--image_format', type=str, default='PNG', choices=['jpg', 'png', 'bmp', 'jpeg', 'PNG', 'JPEG'])
     
     args = parser.parse_args()
     

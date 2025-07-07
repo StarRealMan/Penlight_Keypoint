@@ -1,0 +1,1 @@
+tensorflowjs_converter --input_format=keras model_checkpoints/model_epoch_30.h5 ./penlight_kp_tfjs/

@@ -195,3 +195,19 @@ cython_debug/
 
 videos/
 images/
+annotations/
+model_checkpoints/
+training_debug/
+training_predictions/
+training_data_visualization/
+quick_test_results/
+test_results/
+*.h5
+*.csv
+*.html
+penlight_kp_savedmodel/
+
+validation/
+training/
+web_model/
+*.json
